@@ -19,10 +19,8 @@ pipeline {
         }
     }
 }
-stage('test and deploy'){
-    parallel{
+
         stage('Test') {
-            agent{label "windows_node"}
             steps {
                 echo 'Running unit tests...'
                 // Add your test step here, e.g., running tests
@@ -30,17 +28,12 @@ stage('test and deploy'){
             }
         }
         stage('Deploy') {
-            agent{label "master"}
             steps {
                 echo 'Deploying the application...'
                 // Add your deploy step here, e.g., copy files to server
                 // sh 'scp target/your-app.jar user@server:/path/to/deploy'
             }
         }
-    }
-}
-        
-        
     }
 
     post {
